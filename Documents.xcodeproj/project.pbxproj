@@ -12,6 +12,11 @@
 		887BEA2C2A69418B00967402 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 887BEA2B2A69418B00967402 /* Assets.xcassets */; };
 		887BEA2F2A69418B00967402 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 887BEA2D2A69418B00967402 /* LaunchScreen.storyboard */; };
 		887BEA372A6A982500967402 /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BEA362A6A982500967402 /* FileManagerService.swift */; };
+		887BEA402A6E155700967402 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BEA3F2A6E155700967402 /* LoginViewController.swift */; };
+		887BEA422A6F341E00967402 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BEA412A6F341E00967402 /* KeychainService.swift */; };
+		887BEA452A6F35C700967402 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 887BEA442A6F35C700967402 /* KeychainSwift */; };
+		887BEA482A6F5F0E00967402 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BEA472A6F5F0E00967402 /* SettingsViewController.swift */; };
+		887BEA4A2A6F810900967402 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BEA492A6F810900967402 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,10 @@
 		887BEA2E2A69418B00967402 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		887BEA302A69418B00967402 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		887BEA362A6A982500967402 /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
+		887BEA3F2A6E155700967402 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		887BEA412A6F341E00967402 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		887BEA472A6F5F0E00967402 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		887BEA492A6F810900967402 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				887BEA452A6F35C700967402 /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,13 +65,25 @@
 			isa = PBXGroup;
 			children = (
 				887BEA222A69418900967402 /* AppDelegate.swift */,
+				887BEA3F2A6E155700967402 /* LoginViewController.swift */,
 				887BEA262A69418900967402 /* DirectoryViewController.swift */,
-				887BEA362A6A982500967402 /* FileManagerService.swift */,
+				887BEA472A6F5F0E00967402 /* SettingsViewController.swift */,
+				887BEA462A6F5ECB00967402 /* Services */,
 				887BEA2B2A69418B00967402 /* Assets.xcassets */,
 				887BEA2D2A69418B00967402 /* LaunchScreen.storyboard */,
 				887BEA302A69418B00967402 /* Info.plist */,
 			);
 			path = Documents;
+			sourceTree = "<group>";
+		};
+		887BEA462A6F5ECB00967402 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				887BEA362A6A982500967402 /* FileManagerService.swift */,
+				887BEA412A6F341E00967402 /* KeychainService.swift */,
+				887BEA492A6F810900967402 /* Extensions.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,6 +102,9 @@
 			dependencies = (
 			);
 			name = Documents;
+			packageProductDependencies = (
+				887BEA442A6F35C700967402 /* KeychainSwift */,
+			);
 			productName = Documents;
 			productReference = 887BEA1F2A69418900967402 /* Documents.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +133,9 @@
 				Base,
 			);
 			mainGroup = 887BEA162A69418900967402;
+			packageReferences = (
+				887BEA432A6F35C700967402 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+			);
 			productRefGroup = 887BEA202A69418900967402 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,9 +162,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				887BEA422A6F341E00967402 /* KeychainService.swift in Sources */,
+				887BEA402A6E155700967402 /* LoginViewController.swift in Sources */,
 				887BEA272A69418900967402 /* DirectoryViewController.swift in Sources */,
 				887BEA232A69418900967402 /* AppDelegate.swift in Sources */,
 				887BEA372A6A982500967402 /* FileManagerService.swift in Sources */,
+				887BEA482A6F5F0E00967402 /* SettingsViewController.swift in Sources */,
+				887BEA4A2A6F810900967402 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +374,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		887BEA432A6F35C700967402 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		887BEA442A6F35C700967402 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 887BEA432A6F35C700967402 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 887BEA172A69418900967402 /* Project object */;
 }
