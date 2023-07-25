@@ -9,7 +9,7 @@ class DirectoryViewController: UIViewController {
     
 //MARK: UI elements
     
-    private lazy var tableView = {
+    lazy var tableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
@@ -51,7 +51,6 @@ class DirectoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
         setupView()
         setupNavigationBar()
@@ -68,7 +67,7 @@ class DirectoryViewController: UIViewController {
     private func setupNavigationBar() {
         self.title = currentURL.lastPathComponent
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addImage)),
-                                              UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(addDirectory))]
+                                              UIBarButtonItem(image: UIImage(systemName: "folder.badge.plus"), style: .plain, target: self, action: #selector(addDirectory))]
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
@@ -94,11 +93,31 @@ extension DirectoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
         var config = cell.defaultContentConfiguration()
-        config.text = fileManagerService.contentsOfDirectory(at: currentURL)[indexPath.row].lastPathComponent
-        cell.contentConfiguration = config
-        if fileManagerService.contentsOfDirectory(at: currentURL)[indexPath.row].hasDirectoryPath {
-            cell.accessoryType = .disclosureIndicator
+        
+        if !UserDefaults.standard.bool(forKey: "notAlphabeticalOrder") {
+            let sortedURLs = fileManagerService.contentsOfDirectory(at: currentURL).sorted { a, b in
+                return a.lastPathComponent
+                    .localizedStandardCompare(b.lastPathComponent)
+                        == ComparisonResult.orderedAscending
+            }
+            config.text = sortedURLs[indexPath.row].lastPathComponent
+            accessoryForRow(URLs: sortedURLs)
+        } else {
+            config.text = fileManagerService.contentsOfDirectory(at: currentURL)[indexPath.row].lastPathComponent
+            accessoryForRow(URLs: fileManagerService.contentsOfDirectory(at: currentURL))
         }
+        
+        func accessoryForRow(URLs: [URL]) {
+            if URLs[indexPath.row].hasDirectoryPath {
+                cell.accessoryType = .disclosureIndicator
+            } else {
+                if !UserDefaults.standard.bool(forKey: "noSizeForPhoto") {
+                    config.text! += " (\(fileManagerService.contentsOfDirectory(at: currentURL)[indexPath.row].fileSizeString))"
+                }
+            }
+        }
+        
+        cell.contentConfiguration = config
         return cell
     }
 
